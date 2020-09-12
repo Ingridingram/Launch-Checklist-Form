@@ -4,7 +4,7 @@ window.addEventListener("load", function() {
       response.json().then(function(json) {      
          const missionTarget = document.getElementById('missionTarget');
          let index = 0;
-         missionTarget.addEventListener("click", function(){
+         let getPlanet = function () {
             missionTarget.innerHTML = `
             <h2>Mission Destination</h2>
                <ol>
@@ -16,9 +16,11 @@ window.addEventListener("load", function() {
                </ol>
                <img src="${json[index].image}">`
             index = (index + 1) % json.length;
+         };
+            missionTarget.addEventListener("wheel", getPlanet) 
+            getPlanet()
          });
-      });
-   } );
+   
 
 
    let form = document.querySelector("form");
@@ -64,10 +66,7 @@ window.addEventListener("load", function() {
          launchStatus.style.color = 'green';
          launchStatus.innerHTML = 'Shuttle Is Ready For Launch!'
          getStatus()
-      }
+         }
+      });
    });
-});
-
-
-// /* This block of code shows how to format the HTML once you fetch some planetary JSON!
-
+})
